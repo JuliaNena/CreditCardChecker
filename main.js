@@ -25,75 +25,83 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 // Add your functions below:
 
+*/function to validate credit card numbers*/
 const validateCred = (array)=>{
-    let l = array.length-1;
-  let sum = 0
-  for (let i=l; i>=0; i--){
-    let digit = array[i];
-  if ((l-i)%2===1){
-    digit *=2;
-    if (digit >9){
-      digit -=9;
-    }
+let l = array.length-1;
+let sum = 0
+
+/*loop throuh the array backwards*/
+for (let i=l; i>=0; i--){
+  let digit = array[i];
+
+/*pick every other index*/
+if ((l-i)%2===1){
+  digit *=2;
+
+if (digit >9){
+    digit -=9;
   }
-  sum +=digit;
+}
+sum +=digit;
+}
+
+/*check if sum divided by 10 has a remainder of 0*/
+if(sum%10===0){
+  return true;
+}
+else{
+  return false;
+}
+};
+
+
+
+/* function to find invalid credit card numbers*/
+const findInvalidCards = (array)=>{
+  let invalidCards=[];
+
+
+  /*loop throug the array and calling validateCred()*/
+  for (let i=0; i<array.length; i++){
+    let card = array[i];
+   if (!validateCred(card)){
+      invalidCards.push(card);}
   }
-  
-  if(sum%10===0){
-    return true;
-  }
-  else{
-    return false;
-  }
+  return invalidCards;
   };
   
-  const findInvalidCards = (array)=>{
-    let invalidCards=[];
-    for (let i=0; i<array.length; i++){
-      let card = array[i];
-     if (!validateCred(card)){
-        invalidCards.push(card);}
+
+
+/*function to identify the credit card companies*/
+const idInvalidCardCompanies = (array)=>{
+  let companies = [];
+
+  /*loop through array and check if first number is 3,4,5 or 6 and if company's name is not already there*/
+
+  for (let i=0; i<array.length; i++){
+    let card = array[i];
+    if (card[0]===3 && !companies.includes('Amex')){
+      companies.push('Amex');
     }
-    return invalidCards;
-    };
+  
+    else if (card[0]===4 && !companies.includes('Visa')){
+      companies.push('Visa');
+    }
+    else if(card[0]===5 && !companies.includes('Mastercard')){
+      companies.push('Mastercard');
+    }
+    else if(card[0]===6 &&!companies.includes('Discover')){
+companies.push('Discover');
+    }}
 
-  
-  const idInvalidCardCompanies = (array)=>{
-    let companies = [];
-    for (let i=0; i<array.length; i++){
-      let card = array[i];
-      if (card[0]===3 && !companies.includes('Amex')){
-        companies.push('Amex');
-      }
-    
-      if (card[0]===4 && !companies.includes('Visa')){
-        companies.push('Visa');
-      }
-      if(card[0]===5 && !companies.includes('Mastercard')){
-        companies.push('Mastercard');
-      }
-      if(card[0]===6 &&!companies.includes('Discover')){
-  companies.push('Discover');
-      }}
-      return companies;
-      
-      if (companies.length===0){
-        return 'Company not found';
-      }
-    };
-  
-
-  
-  
-  
-  
-  
-  
-  
-
-
-
-
+    /* return companies or message if no company was found*/
+    if (companies.length >0){
+    return companies;
+    } 
+    else{
+      return 'Company not found';
+    }
+  };
 
 
 
