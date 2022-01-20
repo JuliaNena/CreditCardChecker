@@ -25,7 +25,7 @@ const batch = [valid1, valid2, valid3, valid4, valid5, invalid1, invalid2, inval
 
 // Add your functions below:
 
-*/function to validate credit card numbers*/
+/*function to validate credit card numbers*/
 const validateCred = (array)=>{
 let l = array.length-1;
 let sum = 0
